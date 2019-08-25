@@ -1,68 +1,70 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+1.reject了 用css-moudules的写法 
+配置config/webpack.config.js 里面设置 { importLoaders: 1,modules: true }
+使用  import indexCss from '../../css/style.scss';
+className={indexCss.body}
+className={indexCss["body-wrapper"]}
+注意className带符号的 要用indexCss["body-wrapper"]这种形式
 
-## Available Scripts
 
-In the project directory, you can run:
+2.使用SCSS
+默认文件名是以 [className].module.scss
+classname需要写多个类的 ： <div className={`${headerSty.NavLeft} ${headerSty.active}`}></div>
 
-### `npm start`
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+二 使用ICONFONT注意点
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+1. 因为使用css modules 可能iconfont.css里的样式会被变为哈希值而找不到，而我们又在入口index.js里引入，所以还是拷贝 .iconfont.css 里的样式到 index.html里 这样让他不被转成哈希
 
-### `npm test`
+2. 最好使用unicode模式 这样index.html只需要拷贝一个iconfont.css就行了
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+三 使用react-reudx
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. 先安装 npm i redux --save    npm i react-redux --save
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+2. 编写store/index.js reducer.js 
+`redux 触发先触发action发送给store  store转给reducer处理，reducer返回state改变页面状态`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. APP.js 使用provider全局挂载store
+```<Provider store={store}>
+      <Header></Header>     
+    </Provider>
+```
 
-### `npm run eject`
+4. ./common/header.js使用 用connect 做连接
+```
+const mapStateToProps = (state) => {
+    return {
+        focused:state.focused
+    }
+}
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+const mapDispatchToProps = (dispatch) => {
+    return {
+        handleFocus() {
+            const action = {
+                type : 'search_focused'
+            }
+            dispatch(action)
+        }
+    }
+}
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+export default connect(mapStateToProps,mapDispatchToProps)(Header);
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+这样原来取this.state的数据 改为从this.props取 相关的方法也从this.prop取 当对应方法挂载到mapDispatchToProps上
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+5. 优化 使用combinReducers来拆分 各个业务自己的reducer 注意 上边的mapStateToProps返回state
+就用改为
+```
+ return {
+        focused:state.header.focused
+    }
+```
+因为总的reducer文件到处的时候设置了header
+```
+export default combineReducers({
+    header:HeaderReducer
+})
+```

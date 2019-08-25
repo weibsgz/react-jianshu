@@ -1,0 +1,115 @@
+.headerWrapper {
+    height: 56px;
+    border-bottom: 1px solid #f0f0f0;
+    position: relative;
+    a.logo {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100px;
+        height: 56px;    
+    }
+    img{
+        width: 100px;
+        height: 56px;
+    }
+    .Nav{
+        width: 960px;
+        height: 100%;
+        margin:0 auto;
+        line-height: 56px;
+        .NavItem{
+            padding:0 15px;
+            color: #333;
+        }
+        .NavLeft{
+            float: left;          
+        }
+        .NavRight{
+            float: right;
+            color: #969696;
+        }
+        .active{
+            color:red;
+        }
+        .searchWrapper{
+            float: left;
+            position: relative;
+            .searchIcon{
+                position: absolute;
+                right: 5px;
+                top: 15px;
+                display: block;
+                width: 30px;
+                height: 30px;
+                line-height: 30px;
+                border-radius: 50%;
+                // background-color: green;
+                text-align: center
+            }
+            .searchIconFocused{
+                position: absolute;
+                right: 5px;
+                top: 15px;
+                display: block;
+                width: 30px;
+                height: 30px;
+                line-height: 30px;
+                border-radius: 50%;
+                 background-color: green;
+                text-align: center
+            }
+            .NavSearch{
+                padding: 0 40px 0 20px;
+                width: 160px;
+                height: 38px;
+                font-size: 14px;
+                border: 1px solid #eee;
+                border-radius: 40px;
+                background: #eee;
+                outline: none;
+                border: none;
+                box-sizing: border-box;
+                transition: all 1s;
+            }
+            .NavSearchFocused{
+                padding: 0 40px 0 20px;
+                width: 190px;
+                height: 38px;
+                font-size: 14px;
+                border: 1px solid #eee;
+                border-radius: 40px;
+                background: #eee;
+                outline: none;
+                border: none;
+                box-sizing: border-box;
+                transition: all 1s;
+            }
+        }
+       
+        
+    }
+    .addition{
+        position: absolute;
+        right: 0;
+        top:0;
+        .button{
+            float: right;
+            line-height: 38px;
+            border-radius: 19px;
+            margin-top: 9px;
+            border: 1px solid #ec6141;
+            margin-right: 10px;
+            padding:0 12px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .reg{
+            color: #ec6141;
+        }
+        .writting{
+            color: #fff;
+            background-color: #ec6141
+        }
+    }
+}
