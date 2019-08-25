@@ -1,3 +1,4 @@
+### 一 关于CSS （本项目用的SCSS）
 1.reject了 用css-moudules的写法 
 配置config/webpack.config.js 里面设置 { importLoaders: 1,modules: true }
 使用  import indexCss from '../../css/style.scss';
@@ -11,14 +12,14 @@ className={indexCss["body-wrapper"]}
 classname需要写多个类的 ： <div className={`${headerSty.NavLeft} ${headerSty.active}`}></div>
 
 
-二 使用ICONFONT注意点
+### 二 使用ICONFONT注意点
 
 1. 因为使用css modules 可能iconfont.css里的样式会被变为哈希值而找不到，而我们又在入口index.js里引入，所以还是拷贝 .iconfont.css 里的样式到 index.html里 这样让他不被转成哈希
 
 2. 最好使用unicode模式 这样index.html只需要拷贝一个iconfont.css就行了
 
 
-三 使用react-reudx
+### 三 使用react-reudx
 
 1. 先安装 npm i redux --save    npm i react-redux --save
 
@@ -26,7 +27,8 @@ classname需要写多个类的 ： <div className={`${headerSty.NavLeft} ${heade
 `redux 触发先触发action发送给store  store转给reducer处理，reducer返回state改变页面状态`
 
 3. APP.js 使用provider全局挂载store
-```<Provider store={store}>
+```
+<Provider store={store}>
       <Header></Header>     
     </Provider>
 ```
