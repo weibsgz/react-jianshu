@@ -70,3 +70,47 @@ export default combineReducers({
     header:HeaderReducer
 })
 ```
+
+### 4.用redux-thunk处理异步(可在acitonCreator里写异步函数)
+1. npm i redux-thunk -S
+
+2. 修改 ./store/index.js 使之可以使用thunk和谷歌开发者工具redux两个中间件加上原来有的reducer
+
+3. 这样actionCreator里可以action返回异步函数
+
+
+### 5. react-router-dom
+
+1. npm i react-router-dom -D
+
+2. 关于2种设置路由传参的方法 https://www.jianshu.com/p/abab51c70cfb
+
+3. 重定向： return <Redirect to='/'></Redirect> 见pages/login/index.js
+
+4. 权限： 组件内部可以通过react-redux 判断是否登录 
+```
+ render() { 
+        const {isLogin} = this.props   
+        //如果登錄 返回首頁
+        if(isLogin) {
+            return (
+                <div>
+                    写作页面
+                </div>
+            )
+        }
+        else {
+            return <Redirect to='/login'></Redirect>
+        }
+        
+       
+    }
+
+```
+
+5. react-loadable  可以做异步组件
+
+1. `yarn add react-loadable`
+2. 需要异步加载的组件文件夹下新建 loadable.js 本列：/pages/detail/loadable.js
+3. APP.JS引入组件的方式要修改为 import Detail from './pages/detail/loadable'
+4. 如果detal.js中要取路由参数就会报错 这要借助 withRouter 参见./pages/detail/index.js

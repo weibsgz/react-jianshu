@@ -2,6 +2,7 @@
     height: 56px;
     border-bottom: 1px solid #f0f0f0;
     position: relative;
+    z-index: 1;
     a.logo {
         position: absolute;
         left: 0;
@@ -85,6 +86,44 @@
                 box-sizing: border-box;
                 transition: all 1s;
             }
+            .searchInfo{
+                position: absolute;
+                left: 0;
+                top:56px;
+                width: 240px;
+                padding: 0 20px; 
+                box-shadow:  0 0 8px rgba(0,0,0,.2);
+                background-color: #fff;
+                .searchInfoTitle{
+                    margin: 20px 0 15px 0;
+                    line-height: 20px;
+                    font-size: 14px;
+                    color: #969696;
+                    .searchInfoSwitch{
+                        float: right;
+                        font-size: 13px;
+                        .spin{
+                            display: inline-block;
+                            font-size: 12px;
+                            margin-right: 3px;
+                            transition: all .3s ease-in;
+                            transform-origin: center center;
+                        }
+                    }
+                }  
+                a.searchInfoItem{
+                    display: inline-block;
+                    line-height: 20px;
+                    padding: 0px 5px;
+                    margin-right:8px;
+                    // margin-bottom: 10px;
+                    font-size: 12px;
+                    color: #787878;
+                    border: 1px solid #ddd;
+                    border-radius: 3px;
+                    cursor: pointer;
+                }   
+             }
         }
        
         
